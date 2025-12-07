@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dỗ Vợ</title>
+    <style>
+        body {
+            background: #ffeef2;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Segoe Script', 'Pacifico', cursive;
+        }
+
+        #text {
+            font-size: 48px;
+            color: #ff2e63;
+            text-shadow: 0 0 12px rgba(255, 40, 90, 0.5);
+            white-space: nowrap;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff2e63;
+            font-size: 20px;
+            animation: floatUp 3s linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-200px) scale(1.8); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="text"></div>
+
+    <script>
+        const message = "Vợ ơi đừng giận anh nữa";
+        const textElement = document.getElementById("text");
+        let index = 0;
+
+        function typeText() {
+            if (index < message.length) {
+                textElement.textContent += message.charAt(index);
+                index++;
+                createHeart();
+                setTimeout(typeText, 150);
+            } else {
+                setInterval(createHeart, 150);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.textContent = "❤️";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = (window.innerHeight - 50) + "px";
+            heart.style.fontSize = (20 + Math.random() * 30) + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        typeText();
+    </script>
+</body>
+</html>
